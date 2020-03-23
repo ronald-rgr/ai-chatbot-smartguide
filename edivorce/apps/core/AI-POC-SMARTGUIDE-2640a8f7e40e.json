@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ai-poc-smartguide",
+  "private_key_id": "2640a8f7e40e0b8463409326a1fc274d24a32a51",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCuLb4WjWqFsa0T\nSP0hhqQXe3loSOFoBq1B57o2OrXgXzNuF0yDKCn8/4PDJbvnjzVR4qoTSiPW5AJw\njfTWLEMCIYl6bjOxFD2lI+/Qh6MCyMg5iFI7spIQTz7Z3U8ORKqqj3h7CH+PdKGs\n+T61wVniLkx5/nsNX6a85JaXgVCUzR+uTMBVJc3SAhocs9HzWIeyfWgcXMlQ1zYM\nXEfuoCDF01PxaQ4JlHcxF5qcIXU9IKzUE+/H4gxlGrWVUOCU6hqOOi1os1cWUaO3\nhMatqWE8pQsLYhGBoqUAkGYy/Ko8iLkLoSXrmovUP4ieNb7u7uKL77wDt4QCYOaR\nMuNmOvk7AgMBAAECggEACdrxufycwzLMnF48CwpqEiASPFnUqIT+3E9HGda+6r1I\nP4RBoobXwAZvHKVvw92LrUtEx0b3JIC4jfN3n9Ss9/EQ189mIltcVOc7JFKVtnce\nM88oTqi/G1LN4hg5EbwbPKpV1/72RMDbKFqJTKcY4F4xRT0ma5khaee0iPRarF30\n9bQRn7DqpvYI5q0KsrzCI463Yg51HsWjNpk/S8tLj3wLP1BveMdVR1v816oOJlz5\nziLFGHa/qhkbqaHjnQZ0IMp8v7prqsnJrsFfWYw6NaOEF2RkbcyA5ov5Qpliu8v+\npZwbK+fh1H8EVVTeakAxf9CxpqZDd/wOCoh0JxID9QKBgQDTdm/oKzASgMPhQa1Q\n77b48ovQjN92bNgusaKd9dI5h9z/q8dYVjtPBgFgkB0XFWC2B1EH1pQoG1M8JWxp\ncEZRlchEf72bbzyyCRMVBtney4eY+HkvkkH/NJ99aCi/R5+xA8nWyLCdI4efUVWv\nGzOMf1FW+8/SEry7dbFRhZzfPwKBgQDS3QrzLILvLxdo78lSsbjO/V+bNk4UM2qx\nUXctYW9PVIqjhkiWJcF3smpD38tm+X9+vLSB49pTp7gwDq9e4fIS3ne3t8hQY7pe\nqiAhlrsu9mvJV72TBjjMtPjTz8Pvkc2+IYov5XqVLlR2zTw4b3ucAYlXO/zbsp9k\nPagdNBsjBQKBgD/HzlMRi6tZCTvM6nCqDN8jkQYzJ0d55u6Wh3zrYyAVGZRIBJVh\nVPwtzIaKkSugOA5PQKKDlyZNr5pJk1xuD9eVvNTkTpUuRPlSAV5rNZWcf+akszCl\nBaDrB1v06a1f9guXH+7Xk2WiDMsB5j0tkCvFTwxUYUd0fVZxVi1HhpxTAoGAdAnC\nOdnX4AoZJt01+/TjT70tPLvgscstvpCnNej1mUFb3etKzJ3QXq9nPRzN0Ughujvc\nVdJu1jRo7sFWDq/mSC320booWNzYtbmHXxSUw55F6JIJN/xni3dXqzAdkhu5jhTk\n98Cf+bJ6Nrpwlln7Ovm5e7D+UGR2xHINrqx69oUCgYEAi0QwlFNzCeIqm4vCwY3h\nJ2ESdQGeb8GUUDh1HDX3ks31tNZMwamY0QFum0PXb1jtP0/yn6A50ox0xVc28slT\nffUXCl0Kc+mlYDZM6EG2KlZ/CXCR94lCo1gAGh95qm/nzjIggacL/Bprh5tXlTm4\nVCggxF6/TBADQ4qEeffoJ/g=\n-----END PRIVATE KEY-----\n",
+  "client_email": "dialogflow-upgqdd@ai-poc-smartguide.iam.gserviceaccount.com",
+  "client_id": "110587596992762432001",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dialogflow-upgqdd%40ai-poc-smartguide.iam.gserviceaccount.com"
+}

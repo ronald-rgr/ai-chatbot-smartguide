@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load input_field %}
+{% load step_order %}
+
+{% block title %}{{ block.super }}: Property And Debts{% endblock %}
+
+{% block progress %}{% include "partials/progress.html" %}{% endblock %}
+
+{% block content %}
+
+
+<h1><small>Step {% step_order step="location" %}:</small>Filing Location</h1>
+<p>
+    The only way to obtain an order for divorce is by starting a court proceeding in the B.C. Supreme Court;
+    you must sue your spouse if you want to get divorced. To do this you will need to submit (file) your divorce application at a
+
+    <span class="tooltip-link" data-toggle="tooltip" data-placement="right" data-html="true"
+       title="<b>COURT REGISTRY</b><br /><br />A registry is where you file your divorce documents.
+       Registries are located in courthouses around the province."> court registry<i class="fa fa-question-circle" aria-hidden="true"></i></span>.
+</p>
+<div class="question-well">
+    <h3>Where will you be filing for divorce?</h3>
+    <p>Select a city to find the nearest Supreme Court Registry</p>
+    <select class="response-dropdown form-control" name="court_registry_for_filing">
+        <option value="" disabled selected>Please select</option>
+        {% for registry in registries %}
+            <option value='{{registry}}' {% if court_registry_for_filing == registry %} selected {% endif %}>{{registry}}</option>
+        {% endfor %}
+    </select>
+</div>
+
+
+<div id="questions_modal" class="modal in" tabindex="-1" role="dialog" style="display: block">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                <h1 class="modal-title">Filing Location</h1>
+            </div>
+            <div class="modal-body">
+                <p>Ok, we're almost done asking you questions. The last set of information that we need to know is where  you will be filing your divorce document. You will need to file your documents in person at a court registry.</p>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backgrop in"></div>
+
+{% endblock %}
+
+{% block formBack %}{% prev_step step='location' %}{% endblock %}
+{% block formNext %}{% next_step step='location' %}{% endblock %}
+
+{% block sidebarText %}
+<div>
+    <p>
+        You can file your divorce documents at any Supreme Court registry.
+        Usually, people file their documents at the Supreme Court registry nearest to where they live or work
+        <a href="http://www.courts.gov.bc.ca/supreme_court/court_locations_and_contacts.aspx">(Supreme Court registry addresses).</a>
+        When you go to the registry, ask any staff person to direct you to the divorce counter.
+    </p>
+</div>
+{% endblock %}

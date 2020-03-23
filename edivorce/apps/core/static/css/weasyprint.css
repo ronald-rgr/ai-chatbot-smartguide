@@ -1,0 +1,317 @@
+@media screen {
+    .print-wrapper {
+        font-size: 15px;
+    	max-width: 960px;
+    	margin: 20px auto;
+    }
+}
+
+@media print {
+    .force-break {
+        page-break-before: always;
+    }
+    .avoid-break {
+        page-break-inside: avoid;
+    }
+}
+
+@page {
+    size: Letter;
+    margin: 0.75cm;
+
+    @bottom-right {
+        content: counter(page) " of " counter(pages)
+    }
+}
+
+small.bottom {
+    display: block;
+    position: fixed;
+    bottom: -0.25in;
+    border-top: solid 1px black;
+    width: 100%;
+}
+
+body {font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+
+h1, h2, h3 {
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+h1 {font-size: 24px;}
+
+h2 {font-size: 21px;}
+
+h3 {
+    font-size: 18px;
+    margin-top:40px;
+    margin-bottom: 10px;
+}
+
+hr {
+    border-top: 1px solid #000000;
+    margin: 40px 0 0;
+}
+
+i.fa {
+    font-size: 30px;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.form-entry {
+    display: inline-block;
+    min-width: 200px;
+}
+
+.form-entry-md {
+    display: inline-block;
+    min-width: 100px;
+}
+
+.form-entry-sm {
+    display: inline-block;
+    min-width: 50px;
+}
+
+.form-underline {
+    border-bottom:1px solid #000000;
+}
+
+.form-textarea {
+    display: block;
+    border: solid 1px #000000;
+    padding: 20px;
+    margin: 20px;
+    min-height: 200px;
+}
+
+.claimant-label {
+  float: left;
+}
+
+.form-entry_claimant {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 20px;
+    padding: 0 150px;
+}
+
+.table-fixed {
+    table-layout: fixed;
+}
+
+.table-fixed tr {
+  page-break-inside: avoid;
+}
+
+.table-fixed th {
+    text-align: center;
+}
+
+.table-fixed td {
+    text-align: left;
+    page-break-inside: avoid;
+}
+
+.sig-table {
+    table-layout: fixed;
+    width: auto;
+    margin-top: 60px;
+    margin-bottom: 0;
+}
+.sig-table tbody tr td {
+  padding: 0;
+}
+
+.sig-table td.underline {
+    border-bottom: 1px solid black;
+}
+.sig-table .sig-line-text {
+    font-size: 0.88em;
+}
+.sig-table .sig-col1 {
+  width: 0.5in;
+}
+.sig-table .sig-col2 {
+  width: 1.25in;
+}
+.sig-table .sig-col3 {
+  width: 0.25in;
+}
+
+.sig-table .sig-col4 {
+    width: 3.25in;
+    padding-left: 0;
+}
+
+.sig-table .sig-col5 {
+  width: 2in;
+    padding-left: 0;
+}
+
+.sig-table td {
+    border-top: none !important;
+}
+
+ol.numbered-paragraphs {
+  padding-left: 1.5em;
+}
+
+ol.numbered-paragraphs li {
+  margin-bottom: 10px;
+  padding-left: 1.5em;
+}
+
+.list-td {
+  padding-left: 4em; 
+}
+
+.td-list-item {
+  margin-left: -0.75em;
+  display: inline-block;
+  width: 5em;
+  float: left;
+  text-align: right;
+  padding-right: 0.5em;
+}
+
+.td-list-item .fa {
+  margin-top: -5px;
+  width: 30px;
+  text-align: left;
+}
+
+.td-list-text {
+  padding-left: 4em;
+}
+
+.td-list-text .form-textarea {
+  margin-left: 0em;
+}
+
+.notary-signature {
+  width: 100%;
+  margin-top: 4em;
+}
+
+.notary-signature td {
+  width: 47%;
+}
+
+.notary-signature td.signature-above {
+  border-top: solid 1px black !important;
+}
+
+.notary-signature td.parens {
+  text-align: center;
+  width: 6%;
+}
+
+.new-paragraph {
+  margin-top: 0.5em;
+}
+
+.indented {
+  margin-left: 4em;
+}
+
+.user-entered {
+  white-space: pre-line;
+}
+
+.fact-sheet {
+  page-break-before: always;
+}
+
+.fact-sheet h3 {
+  text-align: center;
+}
+
+.fact-sheet .table.table-bordered tbody tr th {
+  text-align: center;
+  font-weight: normal;
+}
+
+.fact-sheet .table.table-bordered tbody tr .line-number {
+  text-align: center;
+  width: 2em;
+}
+
+.fact-sheet .table.table-bordered tbody tr .amount {
+}
+
+.fact-sheet .table.table-bordered tbody tr .amount .actual {
+  float: right;
+}
+
+.fact-sheet .table.table-bordered tbody tr .percentage,
+.fact-sheet .table.table-bordered tbody tr .total {
+  text-align: right;
+}
+
+ol.parens-list {
+  counter-reset: parens;
+  margin-bottom: 10px;
+}
+
+ol.parens-list > li {
+  counter-increment: parens 1;
+  list-style: none;
+  position: relative;
+  padding-left: 0;
+}
+ol.parens-list > li > ul > li {
+  padding-left: 0;
+}
+
+ol.parens-list > li:before {
+  content: "(" counter(parens, lower-alpha) ") ";
+  position: absolute;
+  left: -2.5em;
+}
+
+
+.th-left {
+  text-align: left !important;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+ol.force-break-last > li:last-child {
+  page-break-before: always;
+}
+
+ol.avoid-break-last > li:last-child {
+  page-break-inside: avoid;
+}
+
+.avoid-break-alone {
+  page-break-before: avoid;
+  page-break-inside: avoid;
+}
+
+.fake-checkbox {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  border: solid 2px black;
+  margin-bottom: -4px;
+}
+
+.sig-line-text .fake-checkbox {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+.checkbox-list p {
+  margin-bottom: 3px;
+}
+
+

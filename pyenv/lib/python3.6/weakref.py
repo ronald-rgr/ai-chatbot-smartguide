@@ -1,0 +1,5 @@
+XSym
+0074
+be01ab2100c1c1d1fb2b73cffbbd8141
+/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/weakref.py
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

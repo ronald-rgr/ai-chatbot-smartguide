@@ -1,0 +1,14 @@
+{% load format_utils %}
+{% if derived.show_fact_sheet_f %}
+<div class="fact-sheet">
+
+    {% if derived.show_fact_sheet_f_you %}
+        {% include 'pdf/partials/fact_sheet_f_table.html' with claimant_id='you'%}
+    {% endif %}
+
+    {% if derived.show_fact_sheet_f_spouse %}
+        {% include 'pdf/partials/fact_sheet_f_table.html' with claimant_id='spouse'%}
+    {% endif %}
+
+</div>
+{% endif %}

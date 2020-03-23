@@ -1,0 +1,5 @@
+XSym
+0078
+a484d093f7fc350b117a180672f9bb59
+/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/sre_compile.py
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

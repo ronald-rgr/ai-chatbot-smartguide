@@ -1,0 +1,17 @@
+{% load input_field %}
+<td class="fact-sheet-answer table-bordered">
+    {% input_field type="text" name="debt_name" value=debt_name maxlength="100" multiple='true' class="fact-sheet-input debt-input-field" placeholder="Name of creditor" data_save_row="true" data_save_select=".debt-input-field" data_skip_ajax="true" %}
+</td>
+<td class="fact-sheet-answer table-bordered">
+    {% input_field type="textarea" name="debt_terms" value=debt_terms maxlength="250" rows="1" multiple='true' class="fact-sheet-input debt-input-field" placeholder="Enter the terms or describe your debt" data_save_row="true" data_save_select=".debt-input-field" data_skip_ajax="true" %}
+</td>
+<td class="fact-sheet-answer table-bordered">
+    <div class="dollar-prefix">
+        {% money_input_field name="debt_monthly_amount" value=debt_monthly_amount multiple='true' class="fact-sheet-input money positive-float debt-input-field" placeholder="" data_save_row="true" data_save_select=".debt-input-field" data_skip_ajax="true" %}
+    </div>
+</td>
+{% if not exclude_delete_button %}
+<td class="fact-sheet-button">
+    <a href="#"><i class="fa fa-times btn-delete-debt"></i></a>
+</td>
+{% endif %}

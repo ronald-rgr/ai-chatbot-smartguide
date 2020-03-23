@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load input_field %}
+
+{% block title %}{{ block.super }}: Prequalification{% endblock %}
+
+{% block progress %}
+    {% if request.user.is_authenticated %}
+        {% include "partials/progress.html" %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+<div>
+    <h1>Before We Begin...</h1>
+    <p>Some divorces are more complicated than others, and not everyone should use this online tool. So let's start by asking you a few questions to make sure that this website is right for your situation.</p>
+</div>
+
+<div class="question-well">
+    <h3>What is your reason (grounds) for asking for a divorce?</h3>
+    <p>
+        The only way you will be granted a divorce in Canada is if you can prove to the courts that your marriage
+        has broken down and cannot be repaired.
+        <br><br>
+    </p>
+
+    <div class="radio">
+        <label>
+        {% input_field type="radio"  name="divorce_reason" value="live separate" data_target_id="other_reason" data_reveal_target="false" data_target_class="not-disqualified" data_reveal_class="true" %}
+        <strong>You and your spouse have lived separate and apart for one year or more</strong>
+        </label>
+    </div>
+    <div class="collapse-trigger collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapse_separated_apart" aria-controls="collapse_separated_apart">
+        <div>
+            What does separated and apart look like?
+        </div>
+    </div>
+    <div class="collapse" id="collapse_separated_apart">
+        <div>
+            <p>
+                You and your spouse are living separate lives from one another, whether under the same roof or in separate homes. This could mean:
+            </p>
+            <ul>
+                <li>You’re living in separate rooms</li>
+                <li>You’re sleeping in separate beds</li>
+                <li>That there’s no sexual relationship</li>
+                <li>That you don’t eat meals together</li>
+                <li>That you don’t attend social events together</li>
+            </ul>
+            <p>Basically you and your spouse have decided the marriage is over and have communicated this to one another</p>
+        </div>
+    </div>
+
+    <div class="collapse-trigger collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapse_work_things_out" aria-controls="collapse_work_things_out">
+        <div>
+            What happens if my spouse and I tried to work things out?
+        </div>
+    </div>
+    <div class="collapse" id="collapse_work_things_out">
+        <div>
+            <p>
+                If you apply for a divorce on the basis of a one-year separation, you can live together for up to 90 days (either before or after you file the application) to try to reconcile. If things do not work out, you can continue your action for divorce as if you
+                had not spent the time together.
+            </p>
+        </div>
+    </div>
+
+    <div class="collapse-trigger collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapse_still_live_together" aria-controls="collapse_still_live_together">
+        <div>
+            Does being separated mean living at two different addresses?
+        </div>
+    </div>
+    <div class="collapse" id="collapse_still_live_together">
+        <div>
+            <p>Some couples choose to separate but still live in the same house. A lawyer can tell you what factors courts may consider when they are deciding if you are separated.</p>
+            <p>
+                A list of activities and behaviours that the
+                <a href="http://www.familylaw.lss.bc.ca/resources/fact_sheets/howToProveYouAreSeparatedIfYouStillLiveTogether.php" target="_blank">
+                    courts consider to be indicators of a couple being separated</a> can be found on the Family Law in B.C. website.
+            </p>
+        </div>
+    </div>
+    <p>&nbsp;</p>
+    <div class="radio">
+        <label>
+            {% input_field type="radio"  name="divorce_reason" value="other" data_target_id="other_reason" data_reveal_target="true" data_target_class="not-disqualified" data_reveal_class="false" %}
+            <strong>Other reasons (grounds)</strong>
+        </label>
+    </div>
+
+    <div class="information-message bg-danger hard-stop" id="other_reason" hidden>
+        <p>If you ask for a divorce  due to "other reason" reasons, you have to present evidence to the court to prove the facts of the adultery or physical or mental cruelty.</p>
+        <p>Sorry, but at this point in time you will not be able to complete your application for divorce using this online tool. Currently the tool supports a limited number of scenarios. In the meantime, you can file for divorce using the forms provided on the <a href="http://www2.gov.bc.ca/gov/content/justice/courthouse-services/documents-forms-records/court-forms/sup-family-forms" target="_blank">Supreme Court of B.C. website</a>.</p>
+    </div>
+
+    <div class="not-disqualified">
+        <p>For example:</p>
+        <ul>
+            <li>Your spouse has been physically abusive or mentally cruel to you</li>
+            <li>Your spouse has committed adultery</li>
+        </ul>
+
+        <div class="collapse-trigger collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapse_which_grounds_select" aria-controls="collapse_which_grounds_select">
+            <div>
+                Which grounds should I select since more than one scenario applies to my marriage?
+            </div>
+        </div>
+        <div class="collapse" id="collapse_which_grounds_select">
+            <div>
+                <p>
+                    Most divorces use the one-year separation ground. But you can also apply for a divorce earlier on the basis of adultery or physical or mental cruelty. If you ask for a divorce for one of these reasons, you have to present evidence to the court to prove
+                    the facts of the adultery or physical or mental cruelty. So generally speaking, asking for a divorce based on the grounds of having lived separate and apart for more than one year is the least complicated.
+                </p>
+                <p>
+                    Canada has no-fault divorce. No-fault, in this context, means that the reasons for marriage breakdown have nothing at all to do with the court's consideration of issues like custody and support. So even though you may be really upset at your spouse's
+                    misbehaviour, it will have no impact on how the legal issues are addressed.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block formbuttons %}
+<div class="form-buttons clearfix not-disqualified">
+
+    {% if married_marriage_like == "Living together in a marriage like relationship" %}
+        <a class="btn btn-primary" href="{% url 'prequalification' '04' %}"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;&nbsp;Back</a>
+    {% else %}
+        <a class="btn btn-primary" href="{% url 'prequalification' '05' %}"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;&nbsp;Back</a>
+    {% endif %}
+
+    <a class="btn btn-success pull-right" href="{% url 'success' %}">Next&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
+</div>
+{% endblock %}
+
+{% block sidebarText %}
+<h3>Grounds for Divorce</h3>
+<p>Canada has no-fault divorce. The only ground for a divorce in the Divorce Act is marriage breakdown. The Divorce Act says you can show your marriage has broken down if any ONE of the following criteria applies to you:</p>
+<ul>
+    <li>You have been living apart for one year or more.</li>
+    <li>Your spouse has been physically or mentally cruel to you.</li>
+    <li>Your spouse has committed adultery.</li>
+</ul>
+<p>To get a divorce for these reasons you have to prove these things in court.</p>
+<p>The majority of divorces are uncontested or undefended divorces (about 80 percent). That means that the divorcing couple have settled on how they're going to settle their parenting, support, and property issues. But they still need a court order for the divorce.</p>
+{% endblock %}

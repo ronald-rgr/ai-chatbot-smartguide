@@ -1,0 +1,206 @@
+{% load static %}
+{% load composites %}
+{% load input_field %}
+{% load format_utils %}
+{% load load_json %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Form 52</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{{ css_root }}/static/css/bootstrap-slim.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ css_root }}/static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ css_root }}/static/css/weasyprint.css" />
+
+    {% include 'partials/gtm_head.html' %}
+</head>
+
+<body>
+
+    <div class="print-wrapper">
+
+        <h1 class="text-center">Form F52 <br>(Rule 15-1 (1))</h1>
+        <p class="text-right">
+            Court File No.: <span class="form-entry not-complete">&nbsp;</span>
+        </p>
+        <p class="text-right">
+            Court Registry: {% if responses.court_registry_for_filing %} {{ responses.court_registry_for_filing }} {% else %} <span class="form-entry not-complete">&nbsp;</span> {% endif %}
+        </p>
+        <p class="text-center">
+            <em> In the Supreme Court of British Columbia </em>
+        </p>
+        <p style="max-height: 32px">
+            Claimant 1:{% include "partials/name_with_alias.html" with name=responses.name_you use_other_name=responses.any_other_name_you other_names=responses.other_name_you class_name='form-entry_claimant' %}
+        </p>
+        <p style="max-height: 32px">
+            Claimant 2:{% include "partials/name_with_alias.html" with name=responses.name_spouse use_other_name=responses.any_other_name_spouse other_names=responses.other_name_spouse class_name='form-entry_claimant' %}
+        </p>
+        <h2 class="text-center">
+           FINAL ORDER
+        </h2>
+
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td> BEFORE A JUDGE OF THE COURT </td>
+                    <td><span class="form-entry not-complete"></span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            This family law case coming on as an undefended family law case
+            without an oral hearing under Rule 10-10 of the Supreme Court
+            Family Rules, and on considering the evidence put forward;
+        </p>
+
+        {% if derived.wants_divorce_order %}
+            <p>THIS COURT ORDERS that</p>
+            <p>
+                Subject to section 12 of the <em>Divorce Act</em> (Canada), claimant 1,
+                {% if responses.name_you %}{% include "partials/name_with_alias.html" with name=responses.name_you use_other_name=responses.any_other_name_you other_names=responses.other_name_you %}{% else %}<span class="form-entry not-complete"></span>{% endif %},
+                and claimant 2,
+                {% if responses.name_spouse %}{% include "partials/name_with_alias.html" with name=responses.name_spouse use_other_name=responses.any_other_name_spouse other_names=responses.other_name_spouse %}{% else %}<span class="form-entry not-complete"></span>{% endif %},
+                who were married at
+                {% if responses.where_were_you_married_city and responses.where_were_you_married_country %}
+                    {% required responses.where_were_you_married_city %},
+                    {% if responses.where_were_you_married_prov %}{{responses.where_were_you_married_prov}},{% endif %}
+                    {% if responses.where_were_you_married_country == 'Other' %}
+                        {% required responses.where_were_you_married_other_country %}
+                    {% else %}
+                        {% required responses.where_were_you_married_country %}
+                    {% endif %}
+                {% else %}<span class="form-entry not-complete"></span>{% endif %}
+                on
+                {% if responses.when_were_you_married %}
+                    {{ responses.when_were_you_married|date_formatter }}
+                {% else %}<span class="form-entry not-complete"></span>{% endif %},
+                are divorced from each other, the divorce to take effect on
+                {% effective_date %}.
+            </p>
+        {% endif %}
+    <div>
+
+    {% if derived.wants_spousal_support or derived.wants_property_division or derived.wants_child_support or derived.wants_other_orders %}
+            <p>THIS COURT ORDERS that BY CONSENT:</p>
+    {% endif %}
+
+            <ol class="numbered-paragraphs avoid-break-last">
+    {% if derived.wants_spousal_support %}
+                <li>{{ responses.spouse_support_details }}&nbsp;</li>
+    {% endif %}
+
+    {% if derived.wants_property_division %}
+                <li>
+        {% if responses.deal_with_property_debt == 'Equal division' %}
+                        Equal division of property and debts.
+        {% else %}
+                        {{ responses.how_to_divide_property_debt }}
+        {% endif %}
+                    <br>{{ responses.other_property_claims }}
+                </li>
+    {% endif %}
+
+    {% if responses.children_of_marriage == 'YES' and derived.wants_child_support %}
+        {% for order in derived.pursuant_parenting_arrangement %}
+                <li>{{ order }}</li>
+        {% endfor %}
+
+        {% for order in derived.pursuant_child_support %}
+                <li>{{ order }}</li>
+        {% endfor %}
+    {% endif %}
+
+    {% if responses.children_of_marriage == 'YES' and responses.special_extraordinary_expenses == 'YES' %}
+                {{ responses.describe_order_special_extra_expenses|striptags|linebreaksli }}
+    {% endif %}
+
+    {% if derived.wants_other_orders %}
+        {% if responses.name_change_you == 'YES' %}
+                <li>
+                  Pursuant to Section 5 of the Name Act, Claimant 1 shall
+                  bear the name of {{ responses.name_change_you_fullname }}
+                  to take effect on {% effective_date %}.
+                </li>
+        {% endif %}
+
+        {% if responses.name_change_spouse == 'YES' %}
+                <li>
+                  Pursuant to Section 5 of the Name Act, Claimant 2 shall
+                  bear the name of {{ responses.name_change_spouse_fullname }}
+                  to take effect on {% effective_date %}.
+                </li>
+        {% endif %}
+
+        {% if responses.other_orders_detail.trim %}
+                <li>{{ responses.other_orders_detail }}</li>
+        {% endif %}
+    {% endif %}
+            </ol>
+        <div class="avoid-break-alone">
+            <p>
+                THE FOLLOWING PARTIES APPROVE THE FORM OF THIS ORDER AND
+                CONSENT TO EACH OF THE ORDERS, IF ANY, THAT ARE INDICATED ABOVE
+                AS BEING BY CONSENT:
+            </p>
+
+            <br><br>
+
+            <table class="table sig-table">
+                <tbody>
+                <tr>
+                    <td class="sig-col4 underline">&nbsp;</td>
+                    <td class="sig-col1">&nbsp;</td>
+                    <td class="sig-col4 underline">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="sig-col4 sig-line-text">
+                        <p>Signature of</p>
+                        <p>
+                            <span class="fake-checkbox"></span> Claimant 1
+                            <span class="fake-checkbox"></span> lawyer for Claimant 1
+                        </p>
+                    </td>
+                    <td class="sig-col1">&nbsp;</td>
+                    <td class="sig-col4 sig-line-text">
+                        <p>Signature of</p>
+                        <p>
+                            <span class="fake-checkbox"></span> Claimant 2
+                            <span class="fake-checkbox"></span> lawyer for Claimant 2
+                        </p>
+                    </td>
+                </tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
+                <tr>
+                    <td class="sig-col2">&nbsp;</td>
+                    <td class="sig-col1">&nbsp;</td>
+                    <td class="sig-col4">By the Court.</td>
+                </tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
+                <tr>
+                    <td class="sig-col2">&nbsp;</td>
+                    <td class="sig-col1">&nbsp;</td>
+                    <td class="sig-col4 underline">&nbsp;<br><br></td>
+                </tr>
+                <tr>
+                    <td class="sig-col2">&nbsp;</td>
+                    <td class="sig-col1">&nbsp;</td>
+                    <td class="sig-col4">Registrar</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+            <small class="bottom">Printed on {% now "F jS, Y" %} from https://justice.gov.bc.ca/divorce</small>
+        </div>
+    </div>
+</body>
+
+</html>

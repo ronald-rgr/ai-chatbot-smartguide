@@ -1,0 +1,642 @@
+{% extends 'base.html' %}
+{% load input_field %}
+{% load step_order %}
+
+{% block title %}{{ block.super }}: Your Children {% endblock %}
+
+{% block progress %}{% include "partials/progress.html" %}{% endblock %}
+
+{% block content %}
+    <h1><small>Step {% step_order step="children" %}:</small>Children - Income & expenses</h1>
+
+    <div class="question-well">
+        <h3>How will you and your spouse be determining your income?</h3>
+        <p>Under the Federal Guidelines, you can do one of the following:</p>
+
+        <div class="radio">
+            <label>
+                {% input_field type="radio" name="how_will_calculate_income" autocomplete="off" value="using specific rules" data_invert_target="#agreement_entered_message" data_reveal_target="true" %}
+                Calculate your income using the
+                <a href="http://laws-lois.justice.gc.ca/eng/regulations/SOR-97-175/page-2.html#h-6" target="_blank">
+                    specific rules (sections 15 to 20)
+                </a> set out in the Federal Guidelines
+            </label>
+            <p>
+                Under these rules, the total income shown on line 150 of your most recent income tax return or your
+                notice of assessment is a good place to start. The Federal Child Support Guidelines
+                <a href="http://www.justice.gc.ca/eng/rp-pr/fl-lf/child-enfant/guide/toc-tdm.html" target="_blank">Step-by-Step</a>
+                Guide has a
+                <a href="http://www.justice.gc.ca/eng/rp-pr/fl-lf/child-enfant/guide/w1-f1.html#s1" target="_blank">
+                    worksheet
+                </a>you can use to help calculate your annual income.
+            </p>
+        </div>
+
+        <div class="radio">
+            <label>
+                {% input_field type="radio" name="how_will_calculate_income" id="how_will_calculate_income_agreement" autocomplete="off" value="entered agreement" data_invert_target="#agreement_entered_message" data_reveal_target="false" %}
+                You and your spouse have come to an agreement as to income ( as per the rules under
+                <a href="http://laws-lois.justice.gc.ca/eng/regulations/SOR-97-175/page-3.html#docCont" target="_blank">
+                    section 21
+                </a> of the Federal Child Support Guidelines)
+            </label>
+            <p>
+                For this option you will need to provide the court with another form called the
+                <a href="https://www2.gov.bc.ca/assets/gov/law-crime-and-justice/courthouse-services/court-files-records/court-forms/supreme-family/f9.pdf?forcedownload=true" target="_blank">
+                    Agreement as to Annual Income (F9)
+                </a>.
+            </p>
+        </div>
+
+        <div class="information-message bg-danger" id="agreement_entered_message" hidden>
+            <p>
+                You must provide the court with an Agreement as to Annual Income (form 9). You can obtain the
+                <a href="https://www2.gov.bc.ca/assets/gov/law-crime-and-justice/courthouse-services/court-files-records/court-forms/supreme-family/f9.pdf?forcedownload=true"
+                   target="_blank">F9 form</a>
+                on the B.C. Government Courthouse Services website.
+            </p>
+            <p>If you file an Agreement as to Annual Income, you must also file:</p>
+            <ul>
+                <li>A copy of the most recent personal income tax return filed by the payor, including any attachments.</li>
+                <li>
+                    A copy of the most recent notice of assessment or reassessment that the Canada Revenue Agency has
+                    issued to the payor.
+                </li>
+            </ul>
+        </div>
+
+        <div class="collapse-trigger collapsed" data-toggle="collapse" aria-expanded="false"
+             data-target="#collapseSpouseFedGuidelines" aria-controls="collapseSpouseFedGuidelines">
+            <div>
+                What are the Federal Child Support Guidelines?
+            </div>
+        </div>
+        <div class="collapse" id="collapseSpouseFedGuidelines">
+            <div>
+                <p>
+                    The Federal Guidelines are a set of rules and tables used to determine child support when
+                    parents
+                    divorce. They are the law. Their main goals are:
+                </p>
+                <ul>
+                    <li>
+                        to establish a fair standard of support for children so that they continue to benefit from
+                        both
+                        parents’ incomes after the separation or divorce;
+                    </li>
+                    <li>
+                        to reduce conflict and tension between parents by making the calculation of child support
+                        more
+                        objective;
+                    </li>
+                    <li>
+                        to ensure that parents and children in similar situations are treated the same; and
+                    </li>
+                    <li>
+                        to make the legal process more efficient and encourage settlements by giving courts and
+                        parents guidance about child support.
+                    </li>
+                </ul>
+                <p>
+                    Source:
+                    {% include "partials/tooltip_link_federal_child_support_guidelines.html" with reference_link="http://www.justice.gc.ca/eng/rp-pr/fl-lf/child-enfant/guide/start-com.html#h12" link_text="Federal Child Support Guidelines Step-by-Step Guide" %}
+                    , Department of Justice
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="annual_gross_income_question">
+        <div class="question-well">
+            <h3>What is your annual gross income as determined above?</h3>
+            <div class="dollar-prefix">
+                {% money_input_field name="annual_gross_income" value="" class="money form-block response-textbox positive-float" %}
+            </div>
+
+            <div class="collapse-trigger collapsed" data-toggle="collapse" aria-expanded="false"
+                 data-target="#collapseIncome" aria-controls="collapseIncome">
+                <div>
+                    How do I calculate annual income?
+                </div>
+            </div>
+            <div class="collapse" id="collapseIncome">
+                <div>
+                    <p>
+                        The Federal Child Support Guidelines, Step-by-Step Guide has a
+                        <a href="http://www.justice.gc.ca/eng/rp-pr/fl-lf/child-enfant/guide/w1-f1.html#s1"
+                           target="_blank">worksheet</a> you can use to help
+                        calculate your annual income. Step-by-step instructions are also detailed in the
+                        <a href="http://www.justice.gc.ca/eng/rp-pr/fl-lf/child-enfant/guide/step5-etap5.html#h7"
+                           target="_blank">Step-by-Step Guide</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-well">
+            <h3>What is your spouse's annual gross income as determined above?</h3>
+            <div class="dollar-prefix">
+                {% money_input_field name="spouse_annual_gross_income" value="" class="money form-block response-textbox positive-float" %}
+            </div>
+
+            <div class="collapse-trigger collapsed" data-toggle="collapse" aria-expanded="false"
+                 data-target="#collapseSpouseIncome" aria-controls="collapseSpouseIncome">
+                <div>
+                    How do I calculate my spouse's annual income?
+                </div>
+            </div>
+            <div class="collapse" id="collapseSpouseIncome">
+                <div>
+                    <p>
+                        The Federal Child Support Guidelines, Step-by-Step Guide has a
+                        <a href="http://www.justice.gc.ca/eng/rp-pr/fl-lf/child-enfant/guide/w1-f1.html#s1"
+                           target="_blank">worksheet</a> you can use to help
+                        calculate your spouse's annual income. Step-by-step instructions are also detailed in the
+                        <a href="http://www.justice.gc.ca/eng/rp-pr/fl-lf/child-enfant/guide/step5-etap5.html#h7"
+                           target="_blank">Step-by-Step Guide</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="text" name="__claimant_children" value="{{ claimant_children }}" hidden >
+
+    <div class="question-well" id="monthly_amount_question" hidden>
+        <h3>What is the monthly child support amount (as per
+            <a href="http://laws-lois.justice.gc.ca/eng/regulations/SOR-97-175/page-5.html#h-9" target="_blank">Schedule 1</a>
+            of the guidelines) that is payable?</h3>
+        <div class="dollar-prefix">
+            {% money_input_field name="payor_monthly_child_support_amount" class="money positive-float form-block response-textbox children-input-block" data_mirror="true" data_mirror_target="#child_support_amount_label" %}
+        </div>
+
+        <div class="collapse-trigger collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapse_determine_payor_amount" aria-controls="collapse_determine_payor_amount">
+            <div>
+                How do I determine what amount needs to be paid?
+            </div>
+        </div>
+        <div class="collapse" id="collapse_determine_payor_amount">
+            <div>
+                <p>
+                    Child support orders made in British Columbia are based on the
+                    <a href="http://laws-lois.justice.gc.ca/eng/regulations/SOR-97-175/page-1.html" target="_blank">
+                        Federal Child Support Guidelines.
+                    </a>These guidelines contain clear rules that courts use to set child support as well as tables
+                    that list the amount of child support the payor has to pay. These amounts are based on how much he
+                    or she earns and how many children the payor must support. Each province has its own table; use the
+                    one for the province where the payor lives.
+                </p>
+                <p>
+                    To figure out how much child support the payor will be paying under the guidelines:
+                </p>
+                <ul>
+                    <li>Use the
+                        <a href="http://www.justice.gc.ca/eng/fl-df/child-enfant/2017/look-rech.asp" target="_blank">
+                            Child Support Table Lookup tool
+                        </a> (effective from November 22, 2017) to calculate the
+                        correct amount of child support.
+                    </li>
+                </ul>
+                <p>
+                    or
+                </p>
+                <ul>
+                    <li>Refer to the
+                        <a href="http://www.justice.gc.ca/eng/fl-df/child-enfant/ft-tf.html" target="_blank">
+                            Federal Child Support Tables
+                        </a>. Make sure you view the table pertaining to the province where the payor lives.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="collapse-trigger collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapse_schedule_one" aria-controls="collapse_schedule_one">
+            <div>
+                 What is Schedule 1?
+            </div>
+        </div>
+        <div class="collapse" id="collapse_schedule_one">
+            <div>
+                <p>
+                    Schedule 1 refers to the federal child support tables which set out the amount of monthly child
+                    support payments for each province on the basis of the annual income of the spouse ordered to pay
+                    child support (the “support payer”) and the number of children for whom a table amount is payable.
+                </p>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>If...</th>
+                            <th>Then…</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>you both live in the same province or territory</td>
+                        <td>use the table for that province or territory.</td>
+                    </tr>
+                    <tr>
+                        <td>you live in different provinces or territories and one of you has sole custody and the other
+                            parent must pay support
+                        </td>
+                        <td>use the table for the province or territory where the paying parent lives.</td>
+                    </tr>
+                    <tr>
+                        <td>you live in different provinces or territories and you share or split custody</td>
+                        <td>use the tables for both provinces or territories where you reside to determine what you
+                            would each pay to the other parent.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>one of you lives outside Canada</td>
+                        <td>use the table for the province or territory where the parent in Canada lives. The laws of
+                            the other country may apply in some cases. You may want to consult a lawyer. You may also
+                            find information relating to <a target="_blank" href="http://www.justice.gc.ca/eng/fl-df/enforce-execution/enforce-execut.html">interjurisdictional
+                                support</a> useful.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="question-well">
+        <h3>
+            Are you claiming any
+            <span class="tooltip-link"
+                  data-toggle="tooltip" data-placement="right" data-html="true"
+                  title="
+                    <b>Special and extraordinary expenses</b>
+                    <p>
+                        Special expenses are over and above the regular cost of living for a child,
+                        such as the cost of child care or post-secondary education. Extraordinary
+                        expenses are for education, programs, or extracurricular activities that meet
+                        the child's needs, such as for tutoring or private school, or for other
+                        activities at which the child excels.
+                     </p>
+                    ">
+                    special and extraordinary expenses<i class="fa fa-question-circle" aria-hidden="true"></i>
+            </span>?
+        </h3>
+
+        <div class="btn-radio-group" data-toggle="buttons">
+            <label class="btn btn-radio">
+                {% input_field type="radio" name="special_extraordinary_expenses" autocomplete="off" value="YES" data_target_id="fact_sheet_a" data_reveal_target="true" %} Yes
+            </label>
+
+            <label class="btn btn-radio">
+                {% input_field type="radio" name="special_extraordinary_expenses" autocomplete="off" value="NO" data_target_id="fact_sheet_a" data_reveal_target="false" %} No
+            </label>
+        </div>
+    </div>
+
+    <div id="fact_sheet_a" class="fact-sheets" hidden>
+    <div class="question-well">
+        <h1>Special or Extraordinary Expenses (Fact Sheet A)</h1>
+        <p>Since you have indicated that there are special or extraordinary expenses, we need you to answer the next set of questions.</p>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Monthly</th>
+                <th>Annually</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="fact-sheet-question">Child care expenses for when the recipient works or goes to school
+                </td>
+                <td class="fact-sheet-answer table-bordered">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="child_care_expenses" id="child_care_expenses_month" class="fact-sheet-input money extraordinary-expense-monthly positive-float" data_mirror_on_pressed="true" data_mirror_target="#child_care_expenses_year" data_mirror_scale="year_up" data_mirror_broadcast_change="true" %}
+                    </div>
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="annual_child_care_expenses" id="child_care_expenses_year" class="fact-sheet-input money extraordinary-expense-annually positive-float" data_mirror_on_pressed="true" data_mirror_target="#child_care_expenses_month" data_mirror_scale="month_down" data_mirror_broadcast_change="true" data_sum="true" data_sum_class="extraordinary-expense-annually" data_sum_target_id="total_extraordinary_expense_annually" %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fact-sheet-question">Any healthcare premiums you pay to your employer or other provider
+                    to provide the coverage to your children rather than yourself
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="children_healthcare_premiums" id="children_healthcare_premiums_month" class="fact-sheet-input money extraordinary-expense-monthly positive-float" data_mirror_on_pressed="true" data_mirror_target="#children_healthcare_premiums_year" data_mirror_scale="year_up"  data_mirror_broadcast_change="true" %}
+                    </div>
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="annual_children_healthcare_premiums"      id="children_healthcare_premiums_year" class="fact-sheet-input money extraordinary-expense-annually positive-float" data_mirror_on_pressed="true" data_mirror_target="#children_healthcare_premiums_month" data_mirror_scale="month_down" data_mirror_broadcast_change="true" data_sum="true" data_sum_class="extraordinary-expense-annually" data_sum_target_id="total_extraordinary_expense_annually" %}
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="fact-sheet-question">
+                <span class="tooltip-link"
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      data-html="true"
+                      title="<b>Health related expenses</b><br />Includes orthodontic treatments, counselling, physiotherapy, occupational
+                      therapy, speech therapy, hearing therapy, prescription drugs, hearing aids, glasses,
+                      and contact lenses">
+                    Health related expenses<i class="fa fa-question-circle" aria-hidden="true"></i>
+                </span>
+                    that exceed insurance reimbursement by at least $100
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="health_related_expenses" id="health_related_expenses_month" class="fact-sheet-input money  extraordinary-expense-monthly positive-float" data_mirror_on_pressed="true" data_mirror_target="#health_related_expenses_year" data_mirror_scale="year_up"  data_mirror_broadcast_change="true" %}
+                    </div>
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="annual_health_related_expenses"      id="health_related_expenses_year" class="fact-sheet-input money  extraordinary-expense-annually positive-float" data_mirror_on_pressed="true" data_mirror_target="#health_related_expenses_month" data_mirror_scale="month_down" data_mirror_broadcast_change="true" data_sum="true" data_sum_class="extraordinary-expense-annually" data_sum_target_id="total_extraordinary_expense_annually" %}
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="fact-sheet-question">
+                    Extraordinary primary, secondary or other
+                    <span class="tooltip-link"
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          data-html="true"
+                          title="<b>Educational expenses</b><br />
+                          <ul><li>Tutoring</li><li>Private school (if the child was
+                      attending private school before the separation and the parents can afford the expense</li></ul>">
+                educational expenses <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </span>
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="extraordinary_educational_expenses" id="extraordinary_educational_expenses_month" class="fact-sheet-input money  extraordinary-expense-monthly positive-float" data_mirror_on_pressed="true" data_mirror_target="#extraordinary_educational_expenses_year" data_mirror_scale="year_up"  data_mirror_broadcast_change="true" %}
+                    </div>
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="annual_extraordinary_educational_expenses"      id="extraordinary_educational_expenses_year" class="fact-sheet-input money  extraordinary-expense-annually positive-float" data_mirror_on_pressed="true" data_mirror_target="#extraordinary_educational_expenses_month" data_mirror_scale="month_down" data_mirror_broadcast_change="true" data_sum="true" data_sum_class="extraordinary-expense-annually" data_sum_target_id="total_extraordinary_expense_annually" %}
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="fact-sheet-question">Post-secondary school expenses</td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="post_secondary_expenses" id="post_secondary_expenses_month" class="fact-sheet-input extraordinary-expense-monthly positive-float" data_mirror_on_pressed="true" data_mirror_target="#post_secondary_expenses_year" data_mirror_scale="year_up"  data_mirror_broadcast_change="true" %}
+                    </div>
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="annual_post_secondary_expenses" id="post_secondary_expenses_year" class="fact-sheet-input money  extraordinary-expense-annually positive-float" data_mirror_on_pressed="true" data_mirror_target="#post_secondary_expenses_month" data_mirror_scale="month_down" data_mirror_broadcast_change="true" data_sum="true" data_sum_class="extraordinary-expense-annually" data_sum_target_id="total_extraordinary_expense_annually" %}
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="fact-sheet-question">Extraordinary
+                    <span class="tooltip-link"
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          data-html="true"
+                          title="<b>Extracurricular activities</b><br />
+                      Expenses for activities in which the child excels and is shown to be particularly gifted
+                      (for example, expenses for a child who is a gifted figure skater, but not expenses for
+                      general skating lessons)">
+                    extracurricular activities
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </span>
+                    expenses
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="extraordinary_extracurricular_expenses" id="extraordinary_extracurricular_expenses_month" class="fact-sheet-input money  extraordinary-expense-monthly positive-float" data_mirror_on_pressed="true" data_mirror_target="#extraordinary_extracurricular_expenses_year" data_mirror_scale="year_up"  data_mirror_broadcast_change="true" %}
+                    </div>
+                </td>
+                <td class="fact-sheet-answer">
+                    <div class="dollar-prefix">
+                        {% money_input_field name="annual_extraordinary_extracurricular_expenses"      id="extraordinary_extracurricular_expenses_year" class="fact-sheet-input money  extraordinary-expense-annually positive-float"  data_mirror_on_pressed="true" data_mirror_target="#extraordinary_extracurricular_expenses_month" data_mirror_scale="month_down" data_mirror_broadcast_change="true" data_sum="true" data_sum_class="extraordinary-expense-annually" data_sum_target_id="total_extraordinary_expense_annually" %}
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="fact-sheet-question"><strong>Total section 7 expenses</strong></td>
+                <td class="fact-sheet-answer" readonly>
+                    <div class="dollar-prefix">
+                        {% money_input_field name="total_section_seven_expenses" id="total_extraordinary_expense_monthly" class="fact-sheet-input money " readonly=""  %}
+                    </div>
+                </td>
+
+                <td class="fact-sheet-answer" readonly>
+                    <div class="dollar-prefix">
+                        {% money_input_field name="annual_total_section_seven_expenses"      id="total_extraordinary_expense_annually" class="fact-sheet-input money " readonly="" data_mirror="true" data_mirror_target="#total_extraordinary_expense_monthly" data_mirror_scale="month_down" data_mirror_broadcast_change="true" %}
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <p>Parties respective
+            <span class="tooltip-link"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  data-html="true"
+                  title="<b>Proportionate share</b><br />
+          Proportionate share means that the amount determined to be payable by each parent is calculated in
+          relation to their respective incomes. For example, if claimant 1 earns $65k and claimant 2 earns $35K,
+          claimant 1’s share is 65% and claimant 2’s share is 35%. To calculate your proportionate share, divide
+          your income by the total of both your incomes, then multiply this number (usually a decimal form, such as
+          0.65) by the actual cost of special or extraordinary expenses.">
+        proportionate shares
+        <i class="fa fa-question-circle" aria-hidden="true"></i>
+    </span>
+            of the total net monthly Section 7 expenses referred to above:</p>
+        <br>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Percentage</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="fact-sheet-question">Your proportionate share</td>
+                <td class="fact-sheet-answer" readonly>
+                    <div class="percent-suffix">
+                        {% input_field type="number" name="your_proportionate_share_percent" value="0" readonly="" id="your_proportionate_share_percent" class="fact-sheet-input" data_calc_percentage="true" data_claimant_one_selector="input[name='annual_gross_income']" data_claimant_two_selector="input[name='spouse_annual_gross_income']" %}
+                        <label>%</label>
+                    </div>
+                </td>
+                <td class="fact-sheet-answer" readonly>
+                    <div class="dollar-prefix">
+                        {% money_input_field name="your_proportionate_share_amount" id="your_proportionate_share_amount" class="fact-sheet-input money child-support-amounts" data_scale="true" data_quantity="#total_extraordinary_expense_monthly" data_scale_factor="input[name='your_proportionate_share_percent']" readonly="" %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fact-sheet-question">Spouse's proportionate share</td>
+                <td class="fact-sheet-answer" readonly>
+                    <div class="percent-suffix">
+                        {% input_field type="number" name="spouse_proportionate_share_percent" value="0" readonly="" id="spouse_proportionate_share_percent" class="fact-sheet-input" data_calc_percentage="true" data_claimant_one_selector="input[name='spouse_annual_gross_income']" data_claimant_two_selector="input[name='annual_gross_income']" %}
+                        <label>%</label>
+                    </div>
+                </td>
+                <td class="fact-sheet-answer" readonly>
+                    <div class="dollar-prefix">
+                        {% money_input_field name="spouse_proportionate_share_amount" id="spouse_proportionate_share_amount" class="fact-sheet-input money child-support-amounts" data_scale="true" data_quantity="#total_extraordinary_expense_monthly" data_scale_factor="input[name='spouse_proportionate_share_percent']" readonly="" %}
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="question-well">
+        <h3>Please describe the order you are asking for regarding Special and Extraordinary Expenses</h3>
+        <p>
+            If you're not sure how to write what you are asking for, you can refer to section "G" of the
+            <a href="http://www.courts.gov.bc.ca/supreme_court/practice_and_procedure/family_law_orders/picklist_family_orders.pdf" target="_blank">
+                The Supreme Court Family Order Pick List</a>
+            which sets out standard terms for most of the usual orders made in family cases.
+        </p>
+        <p>
+            <strong>Please note</strong> - When entering your answer make sure you insert a line break
+            (click the ENTER/RETURN key on the keyboard) between each item that you are asking for.
+        </p>
+        <p>
+            For example:
+        </p>
+        <blockquote>
+            <p>
+                PARTYNAME will pay to PARTYNAME the sum of $ AMOUNT per month commencing on STARTDATE and continuing on the [1st, 15th, 31,st etc ]day of each month thereafter for the child(ren)'s special or extraordinary expenses.
+            </p>
+            <p>
+                No other expenses will be considered special or extraordinary unless agreed to by the parties in advance
+                or by further Court order.
+            </p>
+        </blockquote>
+        {% input_field type="textarea" name="describe_order_special_extra_expenses" class="response-textarea form-control" maxlength="20000" rows="7"%}
+    </div>
+    </div>
+
+{% endblock %}
+
+
+{% block formBack %}{% prev_step step='children' sub_step='income_expenses' %}{% endblock %}
+{% block formNext %}{% next_step step='children' sub_step='income_expenses' %}{% endblock %}
+
+{% block sidebarText %}
+    <p><strong>When you may need to adjust your income</strong></p>
+    <p>You may need to adjust your income if, for example:</p>
+    <ul>
+        <li>your income varies a lot from year to year;</li>
+        <li>you received a one-time payment, such as a bonus;</li>
+        <li>you live in another country where tax rates are very different;</li>
+        <li>you pay or receive spousal support;</li>
+        <li>you receive the Universal Child Care Benefit.</li>
+    </ul>
+    <p>
+        <a href="http://www.justice.gc.ca/eng/rp-pr/fl-lf/child-enfant/guide/w1-f1.html#s1" target="_blank">Worksheet 1</a>
+        shows you how to adjust your income under the Federal Guidelines. The instructions for the worksheet give more
+        information on how to calculate income in a variety of situations.
+    </p>
+    <p>
+        Source:
+        {% include "partials/tooltip_link_federal_child_support_guidelines.html" with reference_link="http://www.justice.gc.ca/eng/rp-pr/fl-lf/child-enfant/guide/step5-etap5.html#h7" link_text="Federal Child Support Guidelines" %}
+        , Department of Justice
+    </p>
+
+    <p><strong>Undue Hardship</strong></p>
+    <p>
+        In any claim for hardship, the court also compares the standards of living of the two households. The court will
+        refuse a claim of undue hardship if it would result in the payor's household having a higher standard of living
+        than the recipient's.
+    </p>
+    <p>
+        For more information on
+        <a href="http://www.familylaw.lss.bc.ca/resources/fact_sheets/child_support.php" target="_blank">undue hardship</a>
+        refer to the Family Law of B.C. website.
+    </p>
+
+    <p><strong>What are special and extraordinary expenses?</strong></p>
+    <p>
+        The child support guidelines say that each parent is required to contribute to the special or extraordinary
+        expenses of raising the children (examples are listed below). These are expenses that go above and beyond what
+        is covered by the child support itself. In making decisions about what to spend on these special expenses,
+        consider:
+    </p>
+    <ul>
+        <li>Whether the expense is needed to address your child's best interests, and</li>
+        <li>How reasonable the expense is, given your income and that of the other party.</li>
+        <li>
+            The amount that must be contributed is based on the proportionate incomes of the parents. For example, if
+            the payor earns twice as much as the recipient, the payor will be required to contribute twice as much.
+        </li>
+    </ul>
+    <p>
+        Either parent can claim special or extraordinary expenses. For example, if you're the payor and you're paying for
+        private school for your child who isn't living with you, you may still get the other parent to contribute.
+    </p>
+    <p>
+        More details on what are
+        <a href="http://www.familylaw.lss.bc.ca/resources/fact_sheets/child_support.php" target="_blank">
+            generally considered special or extraordinary expenses
+        </a>
+        can be found on the Family Law of B.C. website.
+    </p>
+
+    <p><strong>When the table amounts might not apply</strong></p>
+    <p>Judges (or masters) will consider making orders for amounts that are less than those shown in the tables if:</p>
+    <ul>
+        <li>the court agrees with the payor's claim for undue hardship (see below),</li>
+        <li>the child is 19 or over (and not in school full-time),</li>
+        <li>the payor is a step-parent,</li>
+        <li>one parent's income is over $150,000, or</li>
+        <li>one parent makes a claim for special or extraordinary expenses (see below).</li>
+    </ul>
+    <p>
+        Also, children under 19 may no longer be eligible for child support if they get married or voluntarily leave
+        their parents' home for reasons other than family violence or intolerable living conditions.
+    </p>
+    <p>
+        To speak to someone in person, you can call the Department of Justice Canada's Family Law Information Line at
+        1-888-373-2222. When you call, be ready to tell them:
+    </p>
+    <ul>
+        <li>Where the paying parent lives</li>
+        <li>Whether both parents live in the same province or territory, and</li>
+        <li>The number of children to be supported</li>
+    </ul>
+
+    <p><strong>Fed Child Support guidelines Inline Def/disclaimer</strong></p>
+    <p>
+        This is a copy of an official work that is published by the Government of Canada and that this copy has not
+        been produced in affiliation with, or with the endorsement of the Government of Canada.
+    </p>
+
+    <div id="fact_sheet_a_sidebar">
+        <p><strong>Special or Extraordinary Expenses (Fact Sheet A)</strong></p>
+        <p>
+            The items listed below are generally considered to not be special or extraordinary expenses.
+        </p>
+        <ul>
+            <li>Children's share of rent, food, or laundry costs</li>
+            <li>Children's ordinary recreation costs</li>
+            <li>Children's clothes (with the possible exception of uniforms for private school)</li>
+            <li>Children's ordinary schooling costs (including field trips and lunches), unless for post-secondary education</li>
+            <li>Children's allowance or pocket money</li>
+            <li>Children's transportation</li>
+            <li>Costs of visiting the children (although this may be part of an undue hardship claim)</li>
+            <li>Babysitting expenses</li>
+        </ul>
+    </div>
+
+{% endblock %}

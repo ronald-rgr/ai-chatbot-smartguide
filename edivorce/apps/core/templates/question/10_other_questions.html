@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load input_field %}
+{% load step_order %}
+
+{% block title %}{{ block.super }}: Spousal Support{% endblock %}
+
+{% block progress %}{% include "partials/progress.html" %}{% endblock %}
+
+{% block content %}
+
+
+<h1><small>Step {% step_order step="other_questions" %}:</small>Other Questions</h1>
+
+<div class="question-well">
+    <div>
+        <h3>What is the best address to send you official court documents?</h3>
+        <h2>Your Contact Information</h2>
+        <p>House and street number</p>
+        {% input_field type="text" name="address_to_send_official_document_street_you" class="form-block input-wide response-textbox" %}
+        <p>City</p>
+        {% input_field type="text" name="address_to_send_official_document_city_you" class="form-block input-wide response-textbox" %}
+        <p>Prov/State (optional)</p>
+        {% input_field type="text" name="address_to_send_official_document_prov_you" class="form-block input-narrow response-textbox" %}
+
+        <p>Country</p>
+
+        <div class="radio"><label>{% input_field type="radio" class="radio-with-other" name="address_to_send_official_document_country_you" value="Canada" %}Canada</label></div>
+        <div class="radio"><label>{% input_field type="radio" class="radio-with-other" name="address_to_send_official_document_country_you" value="USA" %}USA</label></div>
+        <div class="radio"><label>{% input_field type="radio" class="radio-with-other radio_with_textbox" name="address_to_send_official_document_country_you" value="Other" %}Other {% input_field type="text" name="address_to_send_official_document_other_country_you" class="response-textbox other-textbox input-inline" tabindex="-1" %}</label></div>
+
+        <p>Postal code</p>
+        {% input_field type="text" name="address_to_send_official_document_postal_code_you" class="form-block input-wide response-textbox" %}
+    </div>
+
+    <div>
+        <p>If you don’t live within 30 km of a court registry, you must provide a fax number or email address.
+            If you main address is a PO box, you can list this instead of the fax or email but you must also list
+            an address that’s not a PO box.</p>
+
+        <p>Fax number (optional)</p>
+        {% input_field type="text" name="address_to_send_official_document_fax_you" class="form-block input-wide response-textbox" %}
+        <div class="form-group">
+        <p>Email Address (optional)</p>
+        {% input_field type="text" id="email_textbox" name="address_to_send_official_document_email_you" class="form-block input-wide response-textbox form-control" %}
+        </div>
+    </div>
+</div>
+
+<div class="question-well">
+    <div>
+        <h2>Your Spouse's Contact Information</h2>
+        <p>House and street number</p>
+        {% input_field type="text" name="address_to_send_official_document_street_spouse" class="form-block input-wide response-textbox" %}
+        <p>City</p>
+        {% input_field type="text" name="address_to_send_official_document_city_spouse" class="form-block input-wide response-textbox" %}
+        <p>Prov/State (optional)</p>
+        {% input_field type="text" name="address_to_send_official_document_prov_spouse" class="form-block input-narrow response-textbox" %}
+
+        <p>Country</p>
+
+        <div class="radio"><label>{% input_field type="radio" class="radio-with-other" name="address_to_send_official_document_country_spouse" value="Canada" %}Canada</label></div>
+        <div class="radio"><label>{% input_field type="radio" class="radio-with-other" name="address_to_send_official_document_country_spouse" value="USA" %}USA</label></div>
+        <div class="radio"><label>{% input_field type="radio" class="radio-with-other radio_with_textbox" name="address_to_send_official_document_country_spouse" value="Other" %}Other {% input_field type="text" name="address_to_send_official_document_other_country_spouse" class="response-textbox other-textbox input-inline" tabindex="-1" %}</label></div>
+
+        <p>Postal code</p>
+        {% input_field type="text" name="address_to_send_official_document_postal_code_spouse" class="form-block input-wide response-textbox" %}
+    </div>
+
+    <div>
+        <p>If your spouse doesn’t live within 30 km of a court registry, your spouse must provide a fax number or email address.
+            If your spouse's main address is a PO box, your spouse can list this instead of the fax or email but your spouse must also list
+            an address that’s not a PO box.</p>
+
+        <p>Fax number (optional)</p>
+        {% input_field type="text" name="address_to_send_official_document_fax_spouse" class="form-block input-wide response-textbox" %}
+        <div class="form-group">
+        <p>Email Address (optional)</p>
+        {% input_field type="text" id="email_textbox" name="address_to_send_official_document_email_spouse" class="form-block input-wide response-textbox form-control" %}
+        </div>
+    </div>
+</div>
+
+{% if married_marriage_like == "Legally married" %}
+    <div class="question-well">
+        <h2>Divorce is to take effect on:</h2>
+        <div class="radio"><label>{% input_field type="radio" class="radio-with-other" name="divorce_take_effect_on" value="the 31st day after the date of this order" data_target_id="take_effect_alert" data_reveal_target="false" %}the 31st day after the date of this order</label></div>
+        <div class="radio">
+            <label>{% input_field type="radio" class="radio-with-other" name="divorce_take_effect_on" value="specific date" data_target_id="take_effect_alert" data_reveal_target="true" %}a specific date
+                <span class="input-group date date-picker-group" data-allow-future-date="true">
+                    {% input_field type="text" name="divorce_take_effect_on_specific_date" id="effect_date" class="date-picker-future other-textbox input-inline form-control" tabindex="-1" placeholder="MMM D, YYYY" %}
+                    <span class="input-group-addon" ><i class="fa fa-calendar circle"></i></span>
+                </span>
+            </label>
+            <div class="information-message bg-danger" id="take_effect_alert" hidden>
+                <p>For urgent circumstances ONLY!</p>
+            </div>
+        </div>
+        <p>
+            If you select the "specific date" option you can choose to have the divorce sooner.
+            However, you will need to request this as an "other" order in Step 1 of this questionnaire and you will need to provide evidence in your affidavit as to why the court should waive the 31 days.
+        </p>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+{% block formBack %}{% prev_step step='other_questions' %}{% endblock %}
+{% block formNext %}{% next_step step='other_questions' %}{% endblock %}
+
+{% block sidebarNav %}
+<!-- no sidebar -->
+{% endblock %}
+{% block sidebar %}
+<!-- no sidebar -->
+{% endblock %}

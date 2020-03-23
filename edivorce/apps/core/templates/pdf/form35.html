@@ -1,0 +1,156 @@
+{% load static %}
+{% load input_field %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Form 35</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{{ css_root }}/static/css/bootstrap-slim.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ css_root }}/static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ css_root }}/static/css/weasyprint.css" />
+
+    {% include 'partials/gtm_head.html' %}
+</head>
+
+<body>
+
+    <div class="print-wrapper f35">
+
+        <h1 class="text-center">Form F35 <br>(Rule 10-10 (2))</h1>
+        <p class="text-right">
+            Court File No.: <span class="form-entry not-complete">&nbsp;</span>
+        </p>
+        <p class="text-right">
+            Court Registry: {% if responses.court_registry_for_filing %} {{ responses.court_registry_for_filing }} {% else %} <span class="form-entry not-complete"> </span> {% endif %}
+        </p>
+        <p class="text-center">
+            <em> In the Supreme Court of British Columbia </em>
+        </p>
+        <p>
+          <span class="claimant-label">Claimant 1:</span>
+{% if responses.name_you %}
+  {% include "partials/name_with_alias.html" with name=responses.name_you use_other_name=responses.any_other_name_you other_names=responses.other_name_you class_name='form-entry_claimant' %}
+{% else %}
+          <span class="form-entry not-complete">&nbsp;</span>
+{% endif %}
+        </p>
+        <p>
+          <span class="claimant-label">Claimant 2:</span>
+{% if responses.name_spouse %}
+  {% include "partials/name_with_alias.html" with name=responses.name_spouse use_other_name=responses.any_other_name_spouse other_names=responses.other_name_spouse class_name='form-entry_claimant' %}
+{% else %}
+          <span class="form-entry not-complete">&nbsp;</span>
+{% endif %}
+        </p>
+        <h2 class="text-center">
+           REQUISITION
+        </h2>
+
+        </p>
+        <p>
+            <strong>Filed by:</strong> {{ responses.name_you }}
+        </p>
+        <p>
+            <strong>Filed by:</strong> {{ responses.name_spouse }}
+        </p>
+        <p>
+            Required: final order, without a hearing, in the form attached
+        </p>
+        <p>
+            <strong>FILED WITH THIS REQUISITION ARE:</strong>
+        </p>
+
+        <div class="checkbox-list">
+          <p>
+            <span class="fake-checkbox"></span> draft of the order sought;
+          </p>
+          <p>
+            <span class="fake-checkbox"></span> proof that the case is an undefended family law case;
+          </p>
+          <p>
+            <span class="fake-checkbox"></span> certificate of the registrar in Form F36;
+          </p>
+          <p>
+            <span class="fake-checkbox"></span> filing fee.
+          </p>
+          <p>
+            <span class="fake-checkbox"></span> proof of service of the notice of family claim or counterclaim, as the case may be.
+          </p>
+          <p>
+            <span class="fake-checkbox"></span> Child Support Affidavit in Form F37.
+          </p>
+          <p>
+            <span class="fake-checkbox"></span> affidavit in Form F38.
+          </p>
+        </div>
+
+        <table class="table sig-table">
+            <tbody>
+                <tr>
+                    <td class="sig-col1">Date:</td>
+                    <td class="sig-col2 underline"></td>
+                    <td class="sig-col3"></td>
+                    <td class="sig-col4 underline"></td>
+                    <td class="sig-col3"></td>
+                    <td class="sig-col5 underline"></td>
+                </tr>
+                <tr>
+                    <td class="sig-col1"></td>
+                    <td class="sig-col2 sig-line-text">[dd/mmm/yyyy]</td>
+                    <td class="sig-col3"></td>
+                    <td class="sig-col4 sig-line-text">
+                      <p>Signature of</p>
+                      <p style="white-space: nowrap">
+                      <span class="fake-checkbox"></span> filing party
+                          <span class="fake-checkbox"></span> lawyer for filing party(ies)
+                        </p>
+                    </td>
+                    <td class="sig-col3"></td>
+                    <td class="sig-col5 sig-line-text">
+                        <p>[Print name]<p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table sig-table">
+            <tbody>
+                <tr>
+                    <td class="sig-col1">Date:</td>
+                    <td class="sig-col2 underline"></td>
+                    <td class="sig-col3"></td>
+                    <td class="sig-col4 underline"></td>
+                    <td class="sig-col3"></td>
+                    <td class="sig-col5 underline"></td>
+                </tr>
+                <tr>
+                    <td class="sig-col1"></td>
+                    <td class="sig-col2 sig-line-text">[dd/mmm/yyyy]</td>
+                    <td class="sig-col3"></td>
+                    <td class="sig-col4 sig-line-text">
+                      <p>Signature of</p>
+                      <p style="white-space: nowrap">
+                      <span class="fake-checkbox"></span> filing party
+                          <span class="fake-checkbox"></span> lawyer for filing party(ies)
+                        </p>
+                    </td>
+                    <td class="sig-col3"></td>
+                    <td class="sig-col5 sig-line-text">
+                        <p>[Print name]<p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <small class="bottom">Printed on {% now "F jS, Y" %} from https://justice.gov.bc.ca/divorce</small>
+    </div>
+
+</body>
+</html>

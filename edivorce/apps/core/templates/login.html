@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }}: Login{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'overview' %}">
+    <input type="submit" value="Log-in"/>
+</form>
+
+{% endblock %}
+
+{% block formbuttons %}
+<!-- no formbuttons -->
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}

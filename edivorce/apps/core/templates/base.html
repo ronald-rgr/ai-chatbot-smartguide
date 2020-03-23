@@ -1,0 +1,221 @@
+﻿{% load static %}
+{% load sass_tags %}
+{% load compress %}
+
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>{% block title %}Ministry of Justice e-Divorce{% endblock %}</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% compress css %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-datepicker3.min.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "css/chatbot.css" %}" />
+        <link rel="stylesheet" type="text/css" href="{% sass_src "css/main.scss" %}" />
+        {% endcompress %}
+        {% include 'partials/gtm_head.html' %}
+
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+        <script>
+            window.sm_base_url = '{{ proxy_root_path }}';
+        </script>
+
+    </head>
+    <body onload="submit_message('hello')">
+        {% include 'partials/gtm_body.html' %}
+        <div id="top_banner">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="top_banner-logo">
+                            <a href="{% url 'home' %}"><img src="{% static 'svg/bc-logo.svg' %}" /></a>
+                            <p>Online Divorce Assistant
+                                {% if deployment_environment == 'dev' %}
+                                    <span class="beta environment-type">dev</span>
+                                {% elif deployment_environment == 'test' %}
+                                    <span class="beta environment-type">test</span>
+                                {% elif deployment_environment == 'prod' %}
+                                    <span class="beta environment-type">beta</span>
+                                {% elif deployment_environment == 'localdev' %}
+                                    <span class="beta environment-type">localdev</span>
+                                {% else %}
+                                    <span class="beta environment-type">beta</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="top_banner-user">
+                            {% if request.user.is_authenticated %}
+                            <span>
+                                {{ request.user.display_name}}
+                                &nbsp;&nbsp;|&nbsp;&nbsp; <a href="{% url 'logout' %}">Log out</a>
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if not hide_nav %}
+
+            <div id="mid_banner">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5">
+                            {% block backToDashboard %}
+                            {% if request.user.is_authenticated %}
+                                <div class="mid_banner-dash"><a href="{% url 'overview' %}">
+                                    <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>View Application Stages</a>
+                                </div>
+                            {% endif %}
+                            {% endblock %}
+                        </div>
+                        <div class="col-md-7">
+                            {% block sidebarNav %}
+                            <div class="more_information-link">
+                                <a href="#" class="active"><i class="fa fa-info-circle" aria-hidden="true"></i>More Information</a>
+                            </div>
+                            {% endblock %}
+                            <div class="mid_banner-link">
+                                <a href="{% url 'legal' %}"><i class="fa fa-question-circle" aria-hidden="true"></i>Get Help</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+        <div class="row-flex {% block container %}{% endblock %}">
+            {% block progress %}
+            {% endblock %}
+            <div class="col {% block container_col%}{%endblock %}">
+                <div class="col-flex content-column">
+                    {% block content %}
+
+                    {% endblock %}
+
+                    {% block formbuttons %}
+                    <div class="form-buttons clearfix">
+                        <a class="btn btn-primary" href="{% block formBack %}#{% endblock %}"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;&nbsp;Back</a>
+                        <a class="btn btn-success pull-right" href="{% block formNext %}#{% endblock %}" {% block nextButtonAttribute %}{% endblock %}>Next&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
+                        <a class="btn btn-primary pull-right save-spinner" href="{% url 'overview' %}"><i class="fa fa-floppy-o"></i>&nbsp;&nbsp;&nbsp;Save and return later</a>
+                    </div>
+                    {% endblock %}
+
+                </div>
+            </div>
+
+            {% block sidebar %}
+            <div class="col-flex more_information-column">
+                <a href="#" class="more_information-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <h2>More information</h2>
+                {% block sidebarText %}
+                {% endblock %}
+            </div>
+            {% endblock %}
+        </div>
+        <footer class="footer">
+            <div class="footer-container clearfix">
+                <ul>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="http://www2.gov.bc.ca/gov/content/about-gov-bc-ca" target="_blank">About gov.bc.ca</a>
+                    </li>
+                    <li>
+                        <a href="http://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank">Disclaimer</a>
+                    </li>
+                    <li>
+                        <a href="http://www2.gov.bc.ca/gov/content/home/privacy" target="_blank">Privacy</a>
+                    </li>
+                    <li>
+                        <a href="http://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank">Accessibility</a>
+                    </li>
+                    <li>
+                        <a href="http://www2.gov.bc.ca/gov/content/home/copyright" target="_blank">Copyright</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contact' %}" target="_blank">Contact Us</a>
+                    </li>
+                    {% if show_debug %}
+                    <li>
+                      <em><a href="{% url 'current' %}">Debug Current User</a></em>
+                    </li>
+                    {% endif %}
+                    <li class="pull-right">
+                        <a href="{% url 'acknowledgements' %}">Acknowledgements</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+        <div id="progress-overlay" style="display: none"><div id="progress-overlay-spinner"></div></div>
+
+{% if request.user.is_authenticated and not request.user.has_accepted_terms and request.path != '/current' %}
+        <div id="terms_modal" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fa fa-file" aria-hidden="true"></i>
+                        <h1 class="modal-title">Online Divorce Assistant Terms of Use</h1>
+                    </div>
+                    <div class="modal-body">
+                        <p>Version 1.0, March 31, 2017</p>
+                        <p>The Online Divorce Assistant application is provided as a public service by the Government of British Columbia, Box 9411, Victoria, British Columbia, Canada V8W 9V1.</p>
+                        <p>
+                            <strong>User Agreement</strong><br />
+                            Every person who accesses the Online Divorce Assistant application ("User" or "You") agrees to the Terms of Use in this document and to the fact that the Government of British Columbia may amend these terms from time to time. The Government of British Columbia reserves the right, at its discretion, to change, modify, add, or remove portions of these terms at any time. Please check these terms periodically for changes. Your continued use of the Online Divorce Assistant application following the posting of changes to these terms will mean you accept these changes.
+                        </p>
+                        <p>
+                            <strong>Privacy Protection</strong><br />
+                            The Online Divorce Assistant application does not collect personal information about Users without their consent, and has set up means to keep personal information confidential. However, the Government of British Columbia does collect aggregate data about Users' use of the Online Divorce Assistant application to better understand general User trends at an aggregate level and improve web performance, web services, and website maintenance.
+                        </p>
+                        <p>
+                            An Internet Protocol (IP) network domain name (e.g. shaw.ca) and a partial, non-specific IP address (e.g. 216.10.100.xx) of the computer you are using may be collected and stored on servers located outside Canada. Other information that the Online Divorce Assistant collects (e.g. email addresses) is stored in Canada.
+                        </p>
+                        <p>
+                            The anonymity of Users is therefore reasonably protected but not fully guaranteed. The Online Divorce Assistant applications management of personal information is described more fully on the Government of British Columbia's Privacy Policy page.
+                        </p>
+                        <p>
+                            Absent the use of encryption, the internet and email are not secure media and privacy cannot be ensured. The Government of British Columbia will not be responsible for any damages you or any third party may suffer as a result of the transmission of confidential information that you make to any party through the internet email links provided on the Online Divorce Assistant. The Government of British Columbia is not responsible for any errors or any changes made to any transmitted information. Should you decide to transmit information using internet email links, you do so at your own risk.
+                        </p>
+                        <div class="checkbox" id="terms_and_conditions">
+                            <label> <input type="checkbox" name="has_accepted_terms" value="true" id="terms_checkbox"naked> I agree to the Online Divorce Assistant Terms of Use </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" id="terms_agree_button" class="btn btn-primary btn-lg">Accept and continue</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endif %}
+
+        {% compress js %}
+        <script type="text/javascript" src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/vendor/bootstrap-datepicker.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/vendor/spin.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/vendor/moment.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/vendor/autogrow.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/functions.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/ajax.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+       
+        <script type="text/javascript" src="{% static 'js/chatbot.js' %}"></script>
+        {% endcompress %}
+    </body>
+</html>

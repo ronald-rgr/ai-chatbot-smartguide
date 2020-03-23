@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }}: Incomplete{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Before We Begin...</h1>
+    <p>Some divorces are more complicated than others, and not everyone should use this online tool. So let's start by asking you a few questions to make sure that this website is right for your situation.</p>
+</div>
+
+<div class="information-message bg-danger hard-stop">
+
+    <p>
+        Please go back and make sure you have answered all of the qualifying questions.
+        Currently, this online tool only supports a limited number of scenarios, so we
+        need to verify that you meet the criteria for using the tool.
+    </p>
+    <p>
+        If you do not qualify, you can file for divorce using the forms provided on the
+        <a target="_blank" href="http://www.ag.gov.bc.ca/courts/other/supreme/2010SupRules/info/index_family.htm">Supreme
+            Court of B.C. website</a>.
+    </p>
+    <p>
+        A <a target="_blank" href="http://www.familylaw.lss.bc.ca/guides/divorce/divJoint_courtForms.php">listing
+        of forms</a> that may be required for a Joint Divorce can also be found on the Family Law
+        in B.C. website.
+    </p>
+    <hr>
+    <p>Below are the unanswered questions. Please click on the link to go back and answer the question:</p>
+    <ul>
+        {% for missed_question in missed_questions %}
+        <li>
+            <a href="{{ missed_question.step_url }}">{{ missed_question.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+</div>
+
+{% endblock %}
+
+{% block formbuttons %}
+<div class="form-buttons clearfix not-disqualified">
+    {% if married_marriage_like == "Living together in a marriage like relationship" %}
+        <a class="btn btn-primary" href="{% url 'prequalification' '04' %}"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;&nbsp;Back</a>
+    {% else %}
+        <a class="btn btn-primary" href="{% url 'prequalification' '06' %}"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;&nbsp;Back</a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block sidebarNav %}
+<!-- no sidebar -->
+{% endblock %}
+{% block sidebar %}
+<!-- no sidebar -->
+{% endblock %}

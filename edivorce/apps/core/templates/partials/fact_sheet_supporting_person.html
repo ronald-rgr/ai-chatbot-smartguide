@@ -1,0 +1,19 @@
+{% load input_field %}
+
+{% with "fact-sheet-input "|add:input_field_class as input_field_classes %}
+<td class="fact-sheet-answer table-bordered">
+    {% input_field type="text" name=name_field value=name maxlength="70" class=input_field_classes placeholder="Name" data_save_row="true" data_skip_ajax="true"  data_save_select=save_selector %}
+</td>
+<td class="fact-sheet-answer table-bordered">
+    {% input_field type="text" name=relationship_field value=relationship maxlength="150" class=input_field_classes placeholder="" data_save_row="true" data_skip_ajax="true" data_save_select=save_selector %}
+</td>
+<td class="fact-sheet-answer table-bordered">
+    {% input_field type="textarea" name=reason_field value=reason maxlength="500" rows="1" multiple="true" class=input_field_classes placeholder="" data_save_row="true" data_skip_ajax="true" data_save_select=save_selector %}
+</td>
+{% endwith %}
+
+{% if not exclude_delete_button %}
+<td class="fact-sheet-button">
+    <a href="#" tabindex="-1"><i class="fa fa-times {{ delete_button_class  }}"></i></a>
+</td>
+{% endif %}

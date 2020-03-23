@@ -1,0 +1,10 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: templates/nginx-proxy/nginx-proxy-deploy.yaml
+#=========================================================
+# NAME=nginx-proxy
+# IMAGE_NAMESPACE=jag-csb-edivorce-tools
+TAG_NAME=prod
+SITEMINDER_APPLICATION_DOMAIN=edivorce-prod.pathfinder.bcgov
+# SITEMINDER_WHITE_LIST=
