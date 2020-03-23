@@ -7,7 +7,7 @@ djangorestframework==3.5.3
 gunicorn==19.4.5
 libsass==0.13.3
 psycopg2==2.7.3
-requests==2.13.0
+requests==2.20.0
 six==1.10.0
 Unipath==1.1
 whitenoise==3.0
